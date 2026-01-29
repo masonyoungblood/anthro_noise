@@ -13,7 +13,7 @@ library(ggeffects)
 library(rphylopic)
 
 #set workspace
-setwd("/Users/masonyoungblood/Documents/Work/Fall 2024/Anthropogenic Noise")
+setwd("/Users/masonyoungblood/Documents/Work/Fall 2024/Anthropogenic Noise/anthro_noise")
 
 #create function for table construction
 table_construction <- function(model, vars, intercept = FALSE, digits = 3){
@@ -410,9 +410,8 @@ gt_plot <- menz_plot(data = gt_data,
                      title = "Great Tit", ylab = "Mean ED (s)")
 
 #export combined plot
-png("output/combined_plot.png", width = 8, height = 7, units = "in", res = 600)
-cowplot::plot_grid(pt_plot, wc_plot, cf_plot, gt_plot, sp_plot, cr_plot, tf_plot, nrow = 4, align = "hv")
-dev.off()
+svg("output/combined_plot.svg", width = 8, height = 7); cowplot::plot_grid(pt_plot, wc_plot, cf_plot, gt_plot, sp_plot, cr_plot, tf_plot, nrow = 4, align = "hv"); dev.off()
+png("output/combined_plot.png", width = 8, height = 7, units = "in", res = 600); cowplot::plot_grid(pt_plot, wc_plot, cf_plot, gt_plot, sp_plot, cr_plot, tf_plot, nrow = 4, align = "hv"); dev.off()
 
 #function for plotting predicted interactions
 pred_plot <- function(model, data, img_height, img_name, title, ylab){
@@ -452,6 +451,4 @@ cr_plot <- pred_plot(sequence_effects$field_cricket$noise, aggregate(duration ~ 
 tf_plot <- pred_plot(sequence_effects$tungara_frog$noise, tf_data, img_height = 0.2, img_name = "Engystomops pustulosus", "Túngara Frog", "Mean IOI (s)")
 
 #combine and save
-png("output/interact_plot.png", width = 8, height = 7, units = "in", res = 600)
-cowplot::plot_grid(pt_plot, wc_plot, cf_plot, gt_plot, sp_plot, cr_plot, tf_plot, nrow = 4, align = "hv")
-dev.off()
+#svg("output/interact_plot.svg", width = 8, height = 7); cowplot::plot_grid(pt_plot, wc_plot, cf_plot, gt_plot, sp_plot, cr_plot, tf_plot, nrow = 4, align = "hv"); dev.off()
